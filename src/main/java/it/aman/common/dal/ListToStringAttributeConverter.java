@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.AttributeConverter;
 
-import it.aman.common.StringUtils;
+import it.aman.common.util.StringUtils;
 
 public class ListToStringAttributeConverter implements AttributeConverter<List<String>, String> {
 

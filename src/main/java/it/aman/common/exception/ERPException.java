@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
+import it.aman.common.util.StringUtils;
 import lombok.Getter;
 
 @Getter
@@ -33,12 +34,20 @@ public class ERPException extends Exception {
     }
 
     public ERPException setErrorMessage(String message) {
-        this.errorMessage = message;
+        if(!StringUtils.isBlank(message)) {
+            this.errorMessage = message;
+        }
         return this;
     }
 
     @Override
     public String getMessage() {
         return errorMessage;
+    }
+    
+    public void message(final String message) {
+        if(!StringUtils.isBlank(message)) {
+            this.errorMessage = message;
+        }
     }
 }

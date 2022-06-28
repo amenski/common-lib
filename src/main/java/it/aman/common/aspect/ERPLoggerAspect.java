@@ -13,8 +13,8 @@ import org.springframework.boot.logging.LogLevel;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import it.aman.common.ERPConstants;
 import it.aman.common.annotation.Loggable;
+import it.aman.common.util.ERPConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

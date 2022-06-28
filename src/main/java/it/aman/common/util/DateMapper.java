@@ -1,4 +1,4 @@
-package it.aman.common;
+package it.aman.common.util;
 
 import org.springframework.stereotype.Component;
 import org.threeten.bp.LocalDate;

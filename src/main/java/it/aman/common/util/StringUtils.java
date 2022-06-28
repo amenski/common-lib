@@ -1,4 +1,4 @@
-package it.aman.common;
+package it.aman.common.util;
 
 public final class StringUtils {
 

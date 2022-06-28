@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import it.aman.common.ERPConstants;
+import it.aman.common.util.ERPConstants;
 
 /**
  * In cooperation with an aspect, this is a marker to log method inputs
