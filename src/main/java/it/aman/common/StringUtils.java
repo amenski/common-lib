@@ -1,7 +1,9 @@
 package it.aman.common;
 
-public class StringUtils {
+public final class StringUtils {
 
+    public static final String EMPTY = "";
+    
     public static boolean isBlank(final CharSequence cs) {
         final int strLen = length(cs);
         if (strLen == 0) {

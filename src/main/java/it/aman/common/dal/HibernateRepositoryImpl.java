@@ -112,21 +112,22 @@ public class HibernateRepositoryImpl<T> implements HibernateRepository<T> {
         });
     }
 
+    @Override
     @Transactional
     public <S extends T> S merge(S entity) {
         return em.merge(entity);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public <S extends T> S mergeAndFlush(S entity) {
         S result = merge(entity);
         em.flush();
         return result;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public <S extends T> List<S> mergeAll(Iterable<S> entities) {
         List<S> result = new ArrayList<>();
         for (S entity : entities) {
@@ -135,8 +136,8 @@ public class HibernateRepositoryImpl<T> implements HibernateRepository<T> {
         return result;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public <S extends T> List<S> mergeAllAndFlush(Iterable<S> entities) {
         return executeBatch(() -> {
             List<S> result = new ArrayList<>();
@@ -148,22 +149,23 @@ public class HibernateRepositoryImpl<T> implements HibernateRepository<T> {
         });
     }
 
+    @Override
     @Transactional
     public <S extends T> S update(S entity) {
         session().update(entity);
         return entity;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public <S extends T> S updateAndFlush(S entity) {
         update(entity);
         em.flush();
         return entity;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public <S extends T> List<S> updateAll(Iterable<S> entities) {
         List<S> result = new ArrayList<>();
         for (S entity : entities) {
@@ -172,8 +174,8 @@ public class HibernateRepositoryImpl<T> implements HibernateRepository<T> {
         return result;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public <S extends T> List<S> updateAllAndFlush(Iterable<S> entities) {
         return executeBatch(() -> {
             List<S> result = new ArrayList<>();
