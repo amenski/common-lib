@@ -61,20 +61,18 @@ public class ERPLoggerAspect {
             }
 
             // log
-            log(declaringMethod, LogLevel.INFO, loggable.format(), ERPConstants.METHOD_START);
             log(declaringMethod, LogLevel.INFO, loggable.format(), arguments.toString());
 
             proceed = jointPoint.proceed();
         } catch (Exception e) {
             if (isDevEnv()) {
-                log(declaringMethod, LogLevel.ERROR, "{} {}", e.toString());
+                log(declaringMethod, LogLevel.ERROR, ERPConstants.PARAMETER_2, e.toString());
             } else {
-                log(declaringMethod, LogLevel.ERROR, "{} {}", e.getMessage());
+                log(declaringMethod, LogLevel.ERROR, ERPConstants.PARAMETER_2, e.getMessage());
             }
             throw e; // should not swallow the thrown exception
-        } finally {
-            log(declaringMethod, LogLevel.INFO, "{} {}", ERPConstants.METHOD_END);
         }
+        
         return proceed;
     }
 
