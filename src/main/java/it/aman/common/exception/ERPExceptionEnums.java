@@ -17,11 +17,13 @@ public enum ERPExceptionEnums implements Supplier<ERPException> {
     USERNAME_TAKEN_EXCEPTION(new ERPException(HttpStatus.BAD_REQUEST, 400003, "User-name/Email already in use, please try with a new one.")),
     WRONG_FILE_TYPE_EXCEPTION(new ERPException(HttpStatus.BAD_REQUEST, 400004, "Wrong File type or file type not defined.")),
     INVALID_FIELD_VALUE_EXCEPTION(new ERPException(HttpStatus.BAD_REQUEST, 400005, "Invalid field value.")),
+    INVALID_ID_EXCEPTION(new ERPException(HttpStatus.BAD_REQUEST, 400006, "Invalid id value.")),
 
     ITEM_NOT_FOUND(new ERPException(HttpStatus.NOT_FOUND, 404001, "Not found.")),
     USER_NOT_FOUND(new ERPException(HttpStatus.NOT_FOUND, 404002, "User not found.")),
     ACCOUNT_NOT_FOUND(new ERPException(HttpStatus.NOT_FOUND, 404003, "Account does not exist or is not active.")),
     ROLE_NOT_FOUND(new ERPException(HttpStatus.NOT_FOUND, 404004, "User role not found.")),
+    EMPLOYEE_NOT_FOUND(new ERPException(HttpStatus.NOT_FOUND, 404005, "Employee not found.")),
 
     UNAUTHORIZED_EXCEPTION(new ERPException(HttpStatus.UNAUTHORIZED, 401001, "You are Unauthorized to do this operation!!")),
     USERNAME_OR_PASSWORD_INCORECT(new ERPException(HttpStatus.UNAUTHORIZED, 401002, "User-name or password incorrect!")),
