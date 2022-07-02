@@ -1,9 +1,11 @@
 package it.aman.common.util;
 
+import java.lang.reflect.Array;
+
 public final class StringUtils {
 
     public static final String EMPTY = "";
-    
+
     public static boolean isBlank(final CharSequence cs) {
         final int strLen = length(cs);
         if (strLen == 0) {
@@ -16,7 +18,7 @@ public final class StringUtils {
         }
         return true;
     }
-    
+
     public static boolean isNotBlank(final CharSequence cs) {
         return !isBlank(cs);
     }
@@ -48,8 +50,30 @@ public final class StringUtils {
         return true;
     }
 
-    public static int length(final CharSequence cs) {
+    public static boolean isAnyBlank(final CharSequence... css) {
+        if (arrayIsEmpty(css)) {
+            return false;
+        }
+        for (final CharSequence cs : css) {
+            if (isBlank(cs)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isNoneBlank(final CharSequence... css) {
+        return !isAnyBlank(css);
+    }
+
+    // helper methods
+
+    private static int length(final CharSequence cs) {
         return cs == null ? 0 : cs.length();
+    }
+
+    private static boolean arrayIsEmpty(final CharSequence... css) {
+        return css == null || Array.getLength(css) == 0;
     }
 
     private StringUtils() {
