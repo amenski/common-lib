@@ -17,7 +17,7 @@ public class AbstractServiceCommon {
     private final HttpServletRequest request;
     
     public String getLoggedInUserFromHeader() throws ERPException {
-        final String userName = request.getHeader(ERPConstants.X_REQUESTED_URL_SUBJECT);
+        final String userName = request.getHeader(ERPConstants.X_REQUEST_URL_SUBJECT);
         if (StringUtils.isBlank(userName)) {
             log.error("User name not found in the header.");
             throw ERPExceptionEnums.UNAUTHORIZED_EXCEPTION.get();
