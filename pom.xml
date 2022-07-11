@@ -42,5 +42,19 @@
 			<artifactId>jackson-datatype-threetenbp</artifactId>
 			<version>2.6.4</version>
 		</dependency>
+		<!-- Lock implemented with spring-integration -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-integration</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-jdbc</artifactId>
+		</dependency>
+		<!-- End Lock deps -->
 	</dependencies>
 </project>

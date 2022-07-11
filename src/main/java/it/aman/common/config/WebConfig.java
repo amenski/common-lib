@@ -2,9 +2,14 @@ package it.aman.common.config;
 
 import java.io.IOException;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.integration.jdbc.lock.DefaultLockRepository;
+import org.springframework.integration.jdbc.lock.JdbcLockRegistry;
+import org.springframework.integration.jdbc.lock.LockRepository;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
 
@@ -25,6 +30,18 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 public class WebConfig {
 
     @Bean
+    //@ConditionalOnMissingBean(name = "")
+    DefaultLockRepository defaultLockRepository(DataSource dataSource) {
+        return new DefaultLockRepository(dataSource);
+    }
+
+    @Bean
+    //@ConditionalOnMissingBean(name = "lockRegistry")
+    JdbcLockRegistry jdbcLockRegistry(LockRepository lockRepository) {
+        return new JdbcLockRegistry(lockRepository);
+    }
+    
+    @Bean
     @Primary
     ObjectMapper defaultMapper() {
         ObjectMapper mapper = new ObjectMapper();
@@ -41,7 +58,7 @@ public class WebConfig {
         mapper.registerModule(timeModule);
         return mapper;
     }
-    
+    // Swagger generator uses org.threeten.bp.xxDatexx types 
     public static class OffsetDateTimeSerializer extends JsonSerializer<OffsetDateTime> {
         @Override
         public void serialize(OffsetDateTime arg0, JsonGenerator arg1, SerializerProvider arg2) throws IOException {
