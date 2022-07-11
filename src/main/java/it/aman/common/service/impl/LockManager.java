@@ -7,7 +7,7 @@ import org.springframework.integration.support.locks.LockRegistry;
 import org.springframework.stereotype.Service;
 
 import it.aman.common.service.ILockManager;
-import it.aman.common.util.GeneralUtils;
+import it.aman.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,10 +21,12 @@ public class LockManager implements ILockManager {
     private ThreadLocal<Lock> lock = new ThreadLocal<>();
 
     @Override
-    public boolean acquireLock() {
-        String lockKey = "";
+    public boolean acquireLock(final String lockKey) {
         try {
-            lockKey = GeneralUtils.getLockKey();
+            if(StringUtils.isBlank(lockKey)) {
+                log.error("Lock key can not be null.");
+                return false;
+            }
             log.info("Aquiring lock for key: {}", lockKey);
             Lock lk = lockRegistry.obtain(lockKey);
             if (lk.tryLock(1500, TimeUnit.MILLISECONDS)) {
