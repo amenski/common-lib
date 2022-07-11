@@ -18,7 +18,9 @@ public class LockManager implements ILockManager {
 
     private final LockRegistry lockRegistry;
     
-    private ThreadLocal<Lock> lock = new ThreadLocal<>();
+    private ThreadLocal<Lock> lockTl = new ThreadLocal<>();
+    
+    private ThreadLocal<String> lockKeyTl = new ThreadLocal<>();
 
     @Override
     public boolean acquireLock(final String lockKey) {
@@ -27,10 +29,11 @@ public class LockManager implements ILockManager {
                 log.error("Lock key can not be null.");
                 return false;
             }
+            lockKeyTl.set(lockKey);
             log.info("Aquiring lock for key: {}", lockKey);
             Lock lk = lockRegistry.obtain(lockKey);
             if (lk.tryLock(1500, TimeUnit.MILLISECONDS)) {
-                lock.set(lk);
+                lockTl.set(lk);
                 return true;
             }
         } catch (InterruptedException e) {
@@ -42,16 +45,18 @@ public class LockManager implements ILockManager {
 
     @Override
     public boolean releaseLock() {
-        if (lock == null || lock.get() == null) {
+        if (lockTl == null || lockTl.get() == null) {
             log.error("Unable to release lock, not yet aquired.");
             return false;
         }
         try {
-            lock.get().unlock();
+            lockTl.get().unlock();
+            log.info("Released lock for: {}", lockKeyTl.get());
         } catch (Exception e) {
             log.error("Error unlocking: {}", e);
         } finally {
-            lock.remove(); // prevent memory leak
+            lockTl.remove(); // prevent memory leak
+            lockKeyTl.remove();
         }
         return true;
     }
