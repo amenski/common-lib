@@ -6,5 +6,5 @@ public interface ILockManager {
 
     public abstract boolean releaseLock();
 
-    public abstract boolean isLockAquired();
+    public abstract boolean isLockAcquired();
 }

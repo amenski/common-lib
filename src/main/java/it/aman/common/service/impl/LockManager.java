@@ -55,7 +55,7 @@ public class LockManager implements ILockManager {
     }
 
     @Override
-    public boolean isLockAquired() {
+    public boolean isLockAcquired() {
         // TODO
         return false;
     }
