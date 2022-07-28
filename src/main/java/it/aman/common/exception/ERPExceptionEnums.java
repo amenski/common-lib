@@ -24,6 +24,10 @@ public enum ERPExceptionEnums implements Supplier<ERPException> {
     ACCOUNT_NOT_FOUND(new ERPException(HttpStatus.NOT_FOUND, 404003, "Account does not exist or is not active.")),
     ROLE_NOT_FOUND(new ERPException(HttpStatus.NOT_FOUND, 404004, "User role not found.")),
     EMPLOYEE_NOT_FOUND(new ERPException(HttpStatus.NOT_FOUND, 404005, "Employee not found.")),
+    
+    
+    OPT_LOCKING_EXCEPTION(new ERPException(HttpStatus.PRECONDITION_FAILED, 412001, "Something has changed while you were working! Please retry.")),
+    
 
     UNAUTHORIZED_EXCEPTION(new ERPException(HttpStatus.UNAUTHORIZED, 401001, "You are Unauthorized to do this operation!!")),
     USERNAME_OR_PASSWORD_INCORECT(new ERPException(HttpStatus.UNAUTHORIZED, 401002, "User-name or password incorrect!")),

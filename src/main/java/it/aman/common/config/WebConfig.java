@@ -32,7 +32,9 @@ public class WebConfig {
     @Bean
     //@ConditionalOnMissingBean(name = "")
     DefaultLockRepository defaultLockRepository(DataSource dataSource) {
-        return new DefaultLockRepository(dataSource);
+        DefaultLockRepository repo = new DefaultLockRepository(dataSource);
+        repo.setTimeToLive(60 * 1000); // default = 10s
+        return repo;
     }
 
     @Bean

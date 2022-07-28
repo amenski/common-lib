@@ -1,6 +1,6 @@
 package it.aman.common.service;
 
-public interface ILockManager {
+public interface IPessimistLockManager {
 
     public abstract boolean acquireLock(final String key);
 
