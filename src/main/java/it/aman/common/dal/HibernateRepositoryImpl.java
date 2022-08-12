@@ -48,11 +48,12 @@ import org.hibernate.internal.AbstractSharedSessionContract;
 public class HibernateRepositoryImpl<T> implements HibernateRepository<T> {
     /**
      * The persistence context type for the entity manager is defaulted or defined
-     * as PersistenceContextType.TRANSACTION. So, everytime there a commit/rollback,
-     * entities will be detached.
+     * as PersistenceContextType.TRANSACTION. The persistence context ends when the
+     * associated JTA transaction commits or rollsback, forcing entities to become
+     * detached.
      * 
-     * @PersistenceContext takes care to create/use-existin EntityManager for every
-     *                     thread(request). Hence, create a new persistence
+     * @PersistenceContext takes care to create/use-existing EntityManager for every
+     *                     request. Hence, create a new persistence
      *                     context(first-level cache) or use existing one.
      */
     @PersistenceContext
@@ -217,8 +218,7 @@ public class HibernateRepositoryImpl<T> implements HibernateRepository<T> {
     }
 
     protected <S extends T> S unsupported() {
-        throw new UnsupportedOperationException(
-                "There's no such thing as a save method in JPA, so don't use this hack!");
+        throw new UnsupportedOperationException("Unsupported method!");
     }
 
 }
